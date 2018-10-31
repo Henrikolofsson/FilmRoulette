@@ -103,6 +103,12 @@ public class MDB_API {
                     }
                     JSONResult = buffer.toString();
 
+                    overviews = new ArrayList<String>(Arrays.asList(getStringsFromJSON(JSONResult, "overview")));
+                    titles = new ArrayList<String>(Arrays.asList(getStringsFromJSON(JSONResult, "original_title")));
+                    ratings = new ArrayList<String>(Arrays.asList(getStringsFromJSON(JSONResult, "vote_average")));
+                    dates = new ArrayList<String>(Arrays.asList(getStringsFromJSON(JSONResult, "release_date")));
+                    ids = new ArrayList<String>(Arrays.asList(getStringsFromJSON(JSONResult, "id")));
+
                     try {
                         return getPathsFromJSON(JSONResult);
                     } catch (JSONException e) {
@@ -160,6 +166,16 @@ public class MDB_API {
             }
         }
         return result;
+    }
+
+    public Movie getMovie(int position) {
+        Movie movie = new Movie();
+        movie.setPoster(posters.get(position));
+        movie.setTitle(titles.get(position));
+        movie.setDate(dates.get(position));
+        movie.setOverview(overviews.get(position));
+        movie.setRating(ratings.get(position));
+        return movie;
     }
 
 }

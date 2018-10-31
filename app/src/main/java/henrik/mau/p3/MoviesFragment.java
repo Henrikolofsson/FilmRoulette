@@ -52,6 +52,7 @@ public class MoviesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 System.out.println(position);
+                controller.showMovieDetails(position);
             }
         });
     }

@@ -39,4 +39,11 @@ public class MainActivity extends AppCompatActivity {
         return fragmentManager.findFragmentByTag(tag);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (controller.backPressed()) {
+            super.onBackPressed();
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -16,10 +17,12 @@ public class Controller {
     private StartFragment startFragment;
     private MoviesFragment moviesFragment;
     private MDB_API movieAPI;
+    private DetailsFragment detailsFragment;
+    private Movie movie;
 
     public Controller(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
-        movieAPI= new MDB_API(mainActivity,this);
+        movieAPI = new MDB_API(mainActivity, this);
         initializeDataFragment();
         initializeFragments();
     }
@@ -37,6 +40,7 @@ public class Controller {
     private void initializeFragments() {
         initializeStartFragment();
         initializeMoviesFragment();
+        initializeDetailsFragment();
         setFragment("MoviesFragment");
     }
 
@@ -47,6 +51,14 @@ public class Controller {
         }
         moviesFragment.setController(this);
 
+    }
+
+    private void initializeDetailsFragment() {
+        detailsFragment = (DetailsFragment) mainActivity.getFragment("DetailsFragment");
+        if (detailsFragment == null) {
+            detailsFragment = new DetailsFragment();
+        }
+        detailsFragment.setController(this);
     }
 
     private void initializeStartFragment() {
@@ -65,6 +77,10 @@ public class Controller {
                 break;
             case "MoviesFragment":
                 setFragment(moviesFragment, "MoviesFragment");
+                break;
+            case "DetailsFragment":
+                setFragment(detailsFragment, "DetailsFragment");
+                break;
         }
     }
 
@@ -90,5 +106,31 @@ public class Controller {
         ConnectivityManager connectivityManager = (ConnectivityManager) mainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
+    public void showMovieDetails(int position) {
+        movie = movieAPI.getMovie(position);
+        System.out.println("Test");
+        System.out.println(movie.getPoster());
+        System.out.println(movie.getTitle());
+        setFragment("DetailsFragment");
+        detailsFragment.setMovie(movie);
+    }
+
+
+    public boolean backPressed() {
+        String activeFragment = dataFragment.getActiveFragment();
+        Log.d("backPressed", activeFragment);
+
+        if (activeFragment.equals("MoviesFragment")) {
+            return true;
+        }
+        switch (activeFragment) {
+            case "DetailsFragment":
+                setFragment("MoviesFragment");
+                break;
+        }
+        return false;
     }
 }
