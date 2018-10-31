@@ -19,11 +19,14 @@ import henrik.mau.p3.R;
 public class StartFragment extends Fragment {
     private Controller controller;
     private Spinner spinnerGenre;
+    private Spinner spinnerScore;
     private static String[] genres = new String[]{"Action & Adventure", "Animation", "Anime", "Biography", "Children",
                                                     "Comedy", "Crime", "Cult", "Documentary", "Drama", "Family", "Fantasy",
                                                         "Food", "Game Show", "History", "Home & Garden", "Horror", "Independent",
                                                             "LGBTQ", "Musical", "Mystery", "Reality", "Romance", "Science-Fiction",
                                                                 "Sport", "Standup & Talk", "Thriller", "Travel"};
+
+    private static String[] scores = new String[]{"> 9", "> 8", "> 7", "> 6", "> 5", "Any Score"};
 
     public StartFragment() {
         // Required empty public constructor
@@ -35,8 +38,10 @@ public class StartFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_start, container, false);
         initializeComponents(view);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, genres);
-        spinnerGenre.setAdapter(spinnerAdapter);
+        ArrayAdapter<String> spinnerGenreAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, genres);
+        spinnerGenre.setAdapter(spinnerGenreAdapter);
+        ArrayAdapter<String> spinnerScoreAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, scores);
+        spinnerScore.setAdapter(spinnerScoreAdapter);
         return view;
     }
 
@@ -46,6 +51,7 @@ public class StartFragment extends Fragment {
 
     private void initializeComponents(View view) {
         spinnerGenre = (Spinner) view.findViewById(R.id.spinnerGenre);
+        spinnerScore = (Spinner) view.findViewById(R.id.spinnerScore);
     }
 
 }
