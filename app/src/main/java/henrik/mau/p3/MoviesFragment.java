@@ -3,9 +3,6 @@ package henrik.mau.p3;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Display;
@@ -18,25 +15,12 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MoviesFragment extends Fragment {
-    static GridView gridview;
-    static int width;
-    static ArrayList<String> posters;
-    static boolean sortByPop;
-    static String API_KEY = "1382cca4854a01eee1ddc83dc5102dbf";
+    private static GridView gridview;
+    public static int width;
+    private Controller controller;
 
     public MoviesFragment() {
     }
@@ -44,18 +28,21 @@ public class MoviesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
+        View view = inflater.inflate(R.layout.fragment_movies, container, false);
 
-        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        width = size.x / 3;
+        setWindow();
 
+        initComponents(view);
+
+
+        return view;
+    }
+
+    private void initComponents(View view) {
         if (getActivity() != null) {
             ArrayList<String> array = new ArrayList<String>();
             ImageAdapter adapter = new ImageAdapter(getActivity(), array, width);
-            gridview = (GridView) rootView.findViewById(R.id.gridView);
+            gridview = (GridView) view.findViewById(R.id.gridView);
 
             gridview.setColumnWidth(width);
             gridview.setAdapter(adapter);
@@ -67,9 +54,14 @@ public class MoviesFragment extends Fragment {
                 System.out.println(position);
             }
         });
+    }
 
-
-        return rootView;
+    private void setWindow() {
+        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        width = size.x / 3;
     }
 
     @Override
@@ -77,9 +69,10 @@ public class MoviesFragment extends Fragment {
         super.onStart();
         getActivity().setTitle("Most Popular Movies");
 
-        if (isNetworkAvailable()) {
+        if (controller.isNetworkAvailable()) {
+            controller.startImageLoadTask();
             gridview.setVisibility(GridView.VISIBLE);
-            new ImageLoadTask().execute();
+
         } else {
             TextView textview1 = new TextView(getActivity());
             RelativeLayout layout1 = (RelativeLayout) getActivity().findViewById(R.id.relativelayout);
@@ -91,107 +84,15 @@ public class MoviesFragment extends Fragment {
         }
     }
 
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+
+    public void setContent(ArrayList<String> result) {
+        ImageAdapter adapter = new ImageAdapter(getActivity(), result, width);
+        gridview.setAdapter(adapter);
+
     }
 
+    public void setController(Controller controller) {
+        this.controller = controller;
 
-    public class ImageLoadTask extends AsyncTask<Void, Void, ArrayList<String>> {
-
-        @Override
-        protected ArrayList<String> doInBackground(Void... params) {
-            while (true) {
-                try {
-                    posters = new ArrayList(Arrays.asList(getPathsFromAPI(sortByPop)));
-                    return posters;
-                } catch (Exception e) {
-                    continue;
-                }
-            }
-
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<String> result) {
-            if (result != null && getActivity() != null) {
-                ImageAdapter adapter = new ImageAdapter(getActivity(), result, width);
-                gridview.setAdapter(adapter);
-
-            }
-        }
-
-        public String[] getPathsFromAPI(boolean sortbypop) {
-            while (true) {
-                HttpURLConnection urlConnection = null;
-                BufferedReader reader = null;
-                String JSONResult;
-
-                try {
-                    String urlString = null;
-                    if (sortbypop) {
-                        urlString = "http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=" + API_KEY;
-                    } else {
-                        urlString = "http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&vote_count.gte=500&api_key=" + API_KEY;
-                    }
-                    URL url = new URL(urlString);
-                    urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.setRequestMethod("GET");
-                    urlConnection.connect();
-
-                    //Read the input stream into a String
-                    InputStream inputStream = urlConnection.getInputStream();
-                    StringBuffer buffer = new StringBuffer();
-                    if (inputStream == null) {
-                        return null;
-                    }
-                    reader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        buffer.append(line + "\n");
-                    }
-                    if (buffer.length() == 0) {
-                        return null;
-                    }
-                    JSONResult = buffer.toString();
-
-                    try {
-                        return getPathsFromJSON(JSONResult);
-                    } catch (JSONException e) {
-                        return null;
-                    }
-                } catch (Exception e) {
-                    continue;
-                } finally {
-                    if (urlConnection != null) {
-                        urlConnection.disconnect();
-                    }
-                    if (reader != null) {
-                        try {
-                            reader.close();
-                        } catch (final IOException e) {
-                        }
-                    }
-                }
-
-
-            }
-        }
-
-        public String[] getPathsFromJSON(String JSONStringParam) throws JSONException {
-
-            JSONObject JSONString = new JSONObject(JSONStringParam);
-
-            JSONArray moviesArray = JSONString.getJSONArray("results");
-            String[] result = new String[moviesArray.length()];
-
-            for (int i = 0; i < moviesArray.length(); i++) {
-                JSONObject movie = moviesArray.getJSONObject(i);
-                String moviePath = movie.getString("poster_path");
-                result[i] = moviePath;
-            }
-            return result;
-        }
     }
 }

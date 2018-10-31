@@ -1,6 +1,11 @@
 package henrik.mau.p3;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
+
+import java.util.ArrayList;
 
 import Fragments.DataFragment;
 import Fragments.StartFragment;
@@ -10,9 +15,11 @@ public class Controller {
     private DataFragment dataFragment;
     private StartFragment startFragment;
     private MoviesFragment moviesFragment;
+    private MDB_API movieAPI;
 
     public Controller(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
+        movieAPI= new MDB_API(mainActivity,this);
         initializeDataFragment();
         initializeFragments();
     }
@@ -38,6 +45,7 @@ public class Controller {
         if (moviesFragment == null) {
             moviesFragment = new MoviesFragment();
         }
+        moviesFragment.setController(this);
 
     }
 
@@ -70,4 +78,17 @@ public class Controller {
     }
 
 
+    public void setContent(ArrayList<String> result) {
+        moviesFragment.setContent(result);
+    }
+
+    public void startImageLoadTask() {
+        movieAPI.startImageLoadTask();
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) mainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 }

@@ -60,4 +60,5 @@ public class ImageAdapter extends BaseAdapter {
         Bitmap bitmapResized = Bitmap.createScaledBitmap(b, width, (int) (width * 1.5), false);
         return new BitmapDrawable(mContext.getResources(), bitmapResized);
     }
+
 }
