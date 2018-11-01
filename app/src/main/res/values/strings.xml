@@ -2,7 +2,10 @@
     <string name="app_name">P3</string>
 
     <string name="Genres">GENRE</string>
-    <string name="Score">SCORE</string>
+    <string name="Rating">RATING</string>
+    <string name="Eighteen">18+</string>
+    <string name="Length">Length</string>
+    <string name="RouletteBtn">Roulette</string>
     <string name="title_activity_main2">Settings</string>
 
     <!-- Strings related to Settings -->

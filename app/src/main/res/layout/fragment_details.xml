@@ -6,7 +6,7 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context=".DetailsFragment">
+    tools:context=".Fragments.DetailsFragment">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package Fragments;
+package henrik.mau.p3.Fragments;
 
 
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import henrik.mau.p3.Controller;
+import henrik.mau.p3.Controller.Controller;
 import henrik.mau.p3.R;
 
 /**

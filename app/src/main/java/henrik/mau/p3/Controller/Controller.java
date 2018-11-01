@@ -1,16 +1,22 @@
-package henrik.mau.p3;
+package henrik.mau.p3.Controller;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-//import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import java.util.ArrayList;
 
-import Fragments.DataFragment;
-import Fragments.StartFragment;
+import henrik.mau.p3.Fragments.DataFragment;
+import henrik.mau.p3.Fragments.StartFragment;
+import henrik.mau.p3.Activity.MainActivity;
+import henrik.mau.p3.Entity.Movie;
+import henrik.mau.p3.Fragments.DetailsFragment;
+import henrik.mau.p3.Fragments.MoviesFragment;
+import henrik.mau.p3.MDB.MDBController;
+import henrik.mau.p3.MDB.MDB_API;
 
 public class Controller {
     private MainActivity mainActivity;
@@ -21,12 +27,15 @@ public class Controller {
     private DetailsFragment detailsFragment;
     private Movie movie;
 
+    private Bundle filterBundle = null;
+
     public Controller(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
         //MDBController mdb = new MDBController(mainActivity, this);
         movieAPI = new MDB_API(mainActivity, this);
         initializeDataFragment();
         initializeFragments();
+
     }
 
     private void initializeDataFragment() {
@@ -43,7 +52,6 @@ public class Controller {
         initializeStartFragment();
         initializeMoviesFragment();
         initializeDetailsFragment();
-        setFragment("MoviesFragment");
     }
 
     private void initializeMoviesFragment() {
@@ -110,7 +118,6 @@ public class Controller {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-
     public void showMovieDetails(int position) {
         movie = movieAPI.getMovie(position);
         System.out.println("Test");
@@ -120,6 +127,13 @@ public class Controller {
         detailsFragment.setMovie(movie);
     }
 
+    public void setFilterBundle(Bundle filterBundle){
+        this.filterBundle = filterBundle;
+    }
+
+    public Bundle getFilterBundle(){
+        return filterBundle;
+    }
 
     public boolean backPressed() {
         String activeFragment = dataFragment.getActiveFragment();

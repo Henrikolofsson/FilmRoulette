@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.MDB;
 
 import android.os.AsyncTask;
 
@@ -15,6 +15,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import henrik.mau.p3.Activity.MainActivity;
+import henrik.mau.p3.Controller.Controller;
+import henrik.mau.p3.Entity.Movie;
+
 public class MDB_API {
     private static ArrayList<String> posters;
     private static ArrayList<String> overviews;
@@ -28,6 +32,7 @@ public class MDB_API {
     private static ArrayList<ArrayList<String>> comments;
 
     private static boolean sortByPop;
+    private String URL;
 
     private static String API_KEY = "1382cca4854a01eee1ddc83dc5102dbf";
     private MainActivity activity;
@@ -174,6 +179,12 @@ public class MDB_API {
             }
             return result;
         }
+    }
+
+
+    //Make the method more complex when working with inputs from spinners
+    public void setURLString(String URL){
+        this.URL = URL;
     }
 
 

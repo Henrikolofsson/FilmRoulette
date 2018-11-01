@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.Activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -6,7 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.google.android.youtube.player.YouTubePlayerFragment;
+import henrik.mau.p3.Controller.Controller;
+import henrik.mau.p3.R;
 
 
 public class MainActivity extends AppCompatActivity {
