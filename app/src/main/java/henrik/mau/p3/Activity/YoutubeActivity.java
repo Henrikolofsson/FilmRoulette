@@ -1,13 +1,14 @@
 package henrik.mau.p3;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
-
 
 public class YoutubeActivity extends YouTubeBaseActivity {
 

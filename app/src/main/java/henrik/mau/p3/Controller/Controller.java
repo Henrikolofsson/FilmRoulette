@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.Controller;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -9,8 +9,14 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import Fragments.DataFragment;
-import Fragments.StartFragment;
+import henrik.mau.p3.Fragments.DataFragment;
+import henrik.mau.p3.Fragments.StartFragment;
+import henrik.mau.p3.Activity.MainActivity;
+import henrik.mau.p3.Entity.Movie;
+import henrik.mau.p3.Fragments.DetailsFragment;
+import henrik.mau.p3.Fragments.MoviesFragment;
+import henrik.mau.p3.MDB.MDBController;
+import henrik.mau.p3.MDB.MDB_API;
 
 public class Controller {
     private MainActivity mainActivity;

@@ -1,7 +1,6 @@
-package henrik.mau.p3;
+package henrik.mau.p3.MDB;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +14,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import henrik.mau.p3.Activity.MainActivity;
+import henrik.mau.p3.Controller.Controller;
+import henrik.mau.p3.Entity.Movie;
 
 public class MDB_API {
     private static ArrayList<String> posters;

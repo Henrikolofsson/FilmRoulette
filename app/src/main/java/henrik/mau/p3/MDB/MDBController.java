@@ -1,11 +1,14 @@
-package henrik.mau.p3;
+package henrik.mau.p3.MDB;
 
 import android.util.Log;
 
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Random;
+
+import henrik.mau.p3.Activity.MainActivity;
+import henrik.mau.p3.Controller.Controller;
 
 public class MDBController {
     private static String API_KEY = "1382cca4854a01eee1ddc83dc5102dbf";
@@ -18,12 +21,13 @@ public class MDBController {
     private boolean rolled = false;
 
     private String baseUrl = "http://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY +
-            "&vote_average.gte=0";
+            "&vote_average.gte=0" +
+            "&sort_by=vote_count.desc";
 
     public MDBController(MainActivity activity, Controller controller) {
         this.activity = activity;
         this.controller = controller;
-        request = new MDBRequest(activity, this);
+        request = new MDBRequest(this);
         request.requestStringFromURL(baseUrl);
     }
 
@@ -46,7 +50,10 @@ public class MDBController {
                 rolled = true;
 
             } else if (rolled){
-                
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+                JSONObject movie = jsonArray.getJSONObject(rand.nextInt(jsonArray.length()));
+                Log.d("mdb", movie.toString());
+
             }
         } catch (Exception e) {
             e.printStackTrace();
