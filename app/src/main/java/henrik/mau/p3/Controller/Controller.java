@@ -3,7 +3,7 @@ package henrik.mau.p3.Controller;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-//import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
@@ -27,12 +27,15 @@ public class Controller {
     private DetailsFragment detailsFragment;
     private Movie movie;
 
+    private Bundle filterBundle = null;
+
     public Controller(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
         MDBController mdb = new MDBController(mainActivity, this);
         //movieAPI = new MDB_API(mainActivity, this);
         initializeDataFragment();
         initializeFragments();
+
     }
 
     private void initializeDataFragment() {
@@ -115,7 +118,6 @@ public class Controller {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-
     public void showMovieDetails(int position) {
         movie = movieAPI.getMovie(position);
         System.out.println("Test");
@@ -125,6 +127,13 @@ public class Controller {
         detailsFragment.setMovie(movie);
     }
 
+    public void setFilterBundle(Bundle filterBundle){
+        this.filterBundle = filterBundle;
+    }
+
+    public Bundle getFilterBundle(){
+        return filterBundle;
+    }
 
     public boolean backPressed() {
         String activeFragment = dataFragment.getActiveFragment();
