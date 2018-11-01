@@ -9,7 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import henrik.mau.p3.DetailsFragment;
+import henrik.mau.p3.Fragments.DetailsFragment;
 import henrik.mau.p3.Fragments.DataFragment;
 import henrik.mau.p3.Fragments.StartFragment;
 import henrik.mau.p3.Activity.MainActivity;
