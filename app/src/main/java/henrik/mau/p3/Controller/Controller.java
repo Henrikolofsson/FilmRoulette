@@ -15,13 +15,11 @@ import henrik.mau.p3.Fragments.StartFragment;
 import henrik.mau.p3.Activity.MainActivity;
 import henrik.mau.p3.Entity.Movie;
 import henrik.mau.p3.MDB.MDBController;
-import henrik.mau.p3.MDB.MDB_API;
 
 public class Controller {
     private MainActivity mainActivity;
     private DataFragment dataFragment;
     private StartFragment startFragment;
-    private MDB_API movieAPI;
     private DetailsFragment detailsFragment;
     private Movie movie;
 
@@ -30,7 +28,6 @@ public class Controller {
     public Controller(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
         mdb = new MDBController(mainActivity, this);
-        //movieAPI = new MDB_API(mainActivity, this);
         initializeDataFragment();
         initializeFragments();
 
@@ -88,15 +85,9 @@ public class Controller {
         setFragment("StartFragment");
     }
 
-    public void startImageLoadTask() {
-        movieAPI.startImageLoadTask();
-    }
 
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) mainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
+
+
 
     public void onClick(Bundle bundle) {
         mdb.requestRandomMovie(bundle);
@@ -106,6 +97,7 @@ public class Controller {
         this.movie = movie;
         setFragment("DetailsFragment");
         detailsFragment.setMovie(movie);
+        mdb.requestYoutubeVideo(movie.getId());
     }
 
     public boolean backPressed() {
@@ -117,10 +109,13 @@ public class Controller {
         }
         switch (activeFragment) {
             case "DetailsFragment":
-                setFragment("MoviesFragment");
+                setFragment("StartFragment");
                 break;
         }
         return false;
     }
 
+    public void setTrailer(String result) {
+        movie.setYoutube(result);
+    }
 }

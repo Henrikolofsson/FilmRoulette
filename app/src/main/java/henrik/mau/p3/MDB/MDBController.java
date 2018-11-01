@@ -22,6 +22,7 @@ public class MDBController {
 
     private Random rand = new Random();
     private boolean rolled = false;
+    private boolean movieIsSet = false;
 
     private String baseUrl = "http://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY +
             "&vote_average.gte=0" +
@@ -59,10 +60,15 @@ public class MDBController {
                     ",vote_average.gte=3.9";
         }
 
-        if (adult){
+        if (adult) {
             urlString += "&include_adult=true";
         }
 
+        request.requestStringFromURL(urlString);
+    }
+
+    public void requestYoutubeVideo(String id) {
+        String urlString = "http://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + API_KEY;
         request.requestStringFromURL(urlString);
     }
 
@@ -84,7 +90,18 @@ public class MDBController {
                 request.requestStringFromURL(url);
                 rolled = true;
 
-            } else if (rolled) {
+            } else if (movieIsSet) {
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+                JSONObject youtube;
+                if (jsonArray.length() > 0) {
+                    youtube = jsonArray.getJSONObject(0);
+                    String result = youtube.getString("key");
+                    System.out.println(result);
+                    controller.setTrailer(result);
+                }
+                movieIsSet = false;
+
+            } else if (rolled && !movieIsSet) {
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
                 JSONObject jsonMovie = jsonArray.getJSONObject(rand.nextInt(jsonArray.length()));
                 Movie movie = new Movie(jsonMovie.getString("original_title"),
@@ -95,7 +112,10 @@ public class MDBController {
                         jsonMovie.getString("poster_path"));
                 Log.d("mdb", jsonMovie.toString());
                 controller.setMovie(movie);
+                movieIsSet = true;
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

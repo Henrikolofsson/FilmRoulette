@@ -71,10 +71,12 @@ public class DetailsFragment extends Fragment {
 
         btnYoutube.setOnClickListener((View v) -> {
             Intent intent = new Intent(getActivity(), YoutubeActivity.class);
-            String message = trailer;
             System.out.println(trailer);
-            intent.putExtra("video_code", trailer);
-            startActivity(intent);
+            trailer = movie.getYoutube();
+            if(trailer!=null) {
+                intent.putExtra("video_code", trailer);
+                startActivity(intent);
+            }
         });
 
     }
@@ -92,7 +94,7 @@ public class DetailsFragment extends Fragment {
             tvOverview.setText(movie.getOverview());
             tvRating.setText(movie.getRating());
             tvDate.setText(movie.getDate());
-            trailer = movie.getYoutube();
+
         }
     }
 
