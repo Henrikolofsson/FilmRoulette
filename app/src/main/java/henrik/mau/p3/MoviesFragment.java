@@ -87,6 +87,7 @@ public class MoviesFragment extends Fragment {
 
 
     public void setContent(ArrayList<String> result) {
+        System.out.println(result.get(0).toString());
         ImageAdapter adapter = new ImageAdapter(getActivity(), result, width);
         gridview.setAdapter(adapter);
 

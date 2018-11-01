@@ -7,9 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
+
 
 import com.squareup.picasso.Picasso;
 
@@ -28,7 +29,6 @@ public class DetailsFragment extends Fragment {
 
     private String poster;
     private Movie movie;
-    private Button b;
 
     private TextView tvOverview;
     private TextView tvTitle;
@@ -38,17 +38,16 @@ public class DetailsFragment extends Fragment {
     private ImageView ivSpeech;
     private Controller controller;
     private View view;
+    private String trailer;
+    private Button btnYoutube;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_details, container, false);
-        Intent intent = getActivity().getIntent();
-        getActivity().setTitle("Movie Details");
 
-
-            initComponents(view);
+        initComponents(view);
         return view;
     }
 
@@ -59,12 +58,20 @@ public class DetailsFragment extends Fragment {
         tvOverview = view.findViewById(R.id.overview);
         ivPoster = view.findViewById(R.id.poster);
         ivSpeech = view.findViewById(R.id.ivSpeech);
-
         ivSpeech.setImageResource(R.drawable.speakericon);
+        btnYoutube = view.findViewById(R.id.trailer);
+
+        btnYoutube.setOnClickListener((View v) ->{
+            Intent intent = new Intent(getActivity(),YoutubeActivity.class);
+            String message = trailer;
+            System.out.println(trailer);
+            intent.putExtra("video_code", trailer);
+            startActivity(intent);
+        });
 
     }
 
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         poster = movie.getPoster();
         System.out.println(poster);
@@ -75,6 +82,7 @@ public class DetailsFragment extends Fragment {
         tvOverview.setText(movie.getOverview());
         tvRating.setText(movie.getRating());
         tvDate.setText(movie.getDate());
+        trailer=movie.getYoutube();
     }
 
     public void setMovie(Movie movie) {
@@ -84,4 +92,8 @@ public class DetailsFragment extends Fragment {
     public void setController(Controller controller) {
         this.controller = controller;
     }
+
+
+
+
 }

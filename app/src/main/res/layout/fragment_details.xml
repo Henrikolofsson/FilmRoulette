@@ -119,43 +119,24 @@
                     android:background="@android:color/black" />
 
                 <Button
-                    android:id="@+id/trailer1"
+                    android:id="@+id/trailer"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:onClick="trailer1"
                     android:paddingLeft="15dp"
                     android:paddingTop="0dp"
                     android:paddingRight="0dp"
                     android:paddingBottom="0dp"
-                    android:text="Watch Trailer 1" />
+                    android:text="Watch Trailer " />
 
-                <Button
-                    android:id="@+id/trailer2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:onClick="trailer2"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="0dp"
-                    android:paddingRight="0dp"
-                    android:paddingBottom="0dp"
-                    android:text="Watch Trailer 2" />
+
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:background="@android:color/black" />
 
-                <TextView
-                    android:id="@+id/reviews"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="0dp"
-                    android:paddingTop="15dp"
-                    android:paddingRight="0dp"
-                    android:paddingBottom="15dp"
-                    android:text="Reviews:" />
+
 
 
             </LinearLayout>
