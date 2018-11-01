@@ -65,11 +65,32 @@ public class StartFragment extends Fragment {
         btnRoulette = (Button) view.findViewById(R.id.btnRoulette);
     }
 
+    private int getGenreId(){
+        String genre = spinnerGenre.getSelectedItem().toString();
+        return 0;
+    }
+
+    private String getRating(){
+        return null;
+    }
+
+    private boolean getAdultChoice(){
+        return false;
+    }
+
+    private String getLength(){
+        return null;
+    }
+
     private class ButtonRouletteListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-
+            int genreId = getGenreId();
+            String rating = getRating();
+            boolean adultMovies = getAdultChoice();
+            String getLength = getLength();
+           // controller.setFilterSettings();
         }
     }
 
