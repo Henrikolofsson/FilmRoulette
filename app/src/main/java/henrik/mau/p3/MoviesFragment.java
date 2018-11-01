@@ -71,7 +71,7 @@ public class MoviesFragment extends Fragment {
         getActivity().setTitle("Most Popular Movies");
 
         if (controller.isNetworkAvailable()) {
-            controller.startImageLoadTask();
+            //controller.startImageLoadTask();
             gridview.setVisibility(GridView.VISIBLE);
 
         } else {
@@ -87,6 +87,7 @@ public class MoviesFragment extends Fragment {
 
 
     public void setContent(ArrayList<String> result) {
+        System.out.println(result.get(0).toString());
         ImageAdapter adapter = new ImageAdapter(getActivity(), result, width);
         gridview.setAdapter(adapter);
 
