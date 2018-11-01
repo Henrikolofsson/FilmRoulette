@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.Fragments;
 
 
 import android.content.Context;
@@ -16,6 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import henrik.mau.p3.Controller.Controller;
+import henrik.mau.p3.ImageAdapter;
+import henrik.mau.p3.R;
 
 public class MoviesFragment extends Fragment {
     private static GridView gridview;

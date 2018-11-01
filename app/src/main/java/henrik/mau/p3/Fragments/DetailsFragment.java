@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.Fragments;
 
 
 import android.content.Intent;
@@ -13,6 +13,11 @@ import android.widget.Button;
 
 
 import com.squareup.picasso.Picasso;
+
+import henrik.mau.p3.Activity.YoutubeActivity;
+import henrik.mau.p3.Controller.Controller;
+import henrik.mau.p3.Entity.Movie;
+import henrik.mau.p3.R;
 
 
 /**

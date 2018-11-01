@@ -1,6 +1,4 @@
-package henrik.mau.p3;
-
-import android.util.Log;
+package henrik.mau.p3.MDB;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,11 +6,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MDBRequest {
-    private MainActivity activity;
     private MDBController controller;
 
-    public MDBRequest(MainActivity activity, MDBController controller) {
-        this.activity = activity;
+    public MDBRequest(MDBController controller) {
         this.controller = controller;
     }
 

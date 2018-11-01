@@ -1,4 +1,4 @@
-package Fragments;
+package henrik.mau.p3.Fragments;
 
 
 import android.os.Bundle;
@@ -11,8 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import henrik.mau.p3.Controller;
-import henrik.mau.p3.MainActivity;
+import henrik.mau.p3.Controller.Controller;
 import henrik.mau.p3.R;
 
 /**

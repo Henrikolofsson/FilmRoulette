@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.MDB;
 
 import android.util.Log;
 
@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Random;
+
+import henrik.mau.p3.Activity.MainActivity;
+import henrik.mau.p3.Controller.Controller;
 
 public class MDBController {
     private static String API_KEY = "1382cca4854a01eee1ddc83dc5102dbf";
@@ -24,7 +27,7 @@ public class MDBController {
     public MDBController(MainActivity activity, Controller controller) {
         this.activity = activity;
         this.controller = controller;
-        request = new MDBRequest(activity, this);
+        request = new MDBRequest(this);
         request.requestStringFromURL(baseUrl);
     }
 

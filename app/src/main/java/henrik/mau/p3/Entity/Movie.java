@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.Entity;
 
 public class Movie {
     private String title;
@@ -6,8 +6,6 @@ public class Movie {
     private String overview;
     private String rating;
     private String id;
-    private String favorited;
-    private String comment;
     private String youtube;
     private String poster;
 
@@ -49,22 +47,6 @@ public class Movie {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getFavorited() {
-        return favorited;
-    }
-
-    public void setFavorited(String favorited) {
-        this.favorited = favorited;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public String getYoutube() {
