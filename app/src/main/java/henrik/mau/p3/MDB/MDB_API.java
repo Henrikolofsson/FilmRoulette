@@ -63,7 +63,7 @@ public class MDB_API {
                 }
             }
         }
-
+/*
         @Override
         protected void onPostExecute(ArrayList<String> result) {
             System.out.println("HEJ2");
@@ -75,6 +75,7 @@ public class MDB_API {
 
             }
         }
+        */
 
         public String[] getPathsFromAPI(boolean sortbypop) {
             while (true) {

@@ -9,6 +9,18 @@ public class Movie {
     private String youtube;
     private String poster;
 
+    public Movie(){}
+
+    public Movie(String title, String date, String overview, String rating, String id, String poster) {
+        this.title = title;
+        this.date = date;
+        this.overview = overview;
+        this.rating = rating;
+        this.id = id;
+        this.youtube = youtube;
+        this.poster = poster;
+    }
+
     public String getTitle() {
         return title;
     }

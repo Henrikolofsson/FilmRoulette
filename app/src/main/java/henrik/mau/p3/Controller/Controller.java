@@ -14,24 +14,23 @@ import henrik.mau.p3.Fragments.DataFragment;
 import henrik.mau.p3.Fragments.StartFragment;
 import henrik.mau.p3.Activity.MainActivity;
 import henrik.mau.p3.Entity.Movie;
-import henrik.mau.p3.Fragments.MoviesFragment;
+import henrik.mau.p3.MDB.MDBController;
 import henrik.mau.p3.MDB.MDB_API;
 
 public class Controller {
     private MainActivity mainActivity;
     private DataFragment dataFragment;
     private StartFragment startFragment;
-    private MoviesFragment moviesFragment;
     private MDB_API movieAPI;
     private DetailsFragment detailsFragment;
     private Movie movie;
 
-    private Bundle filterBundle = null;
+    private MDBController mdb;
 
     public Controller(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
-        //MDBController mdb = new MDBController(mainActivity, this);
-        movieAPI = new MDB_API(mainActivity, this);
+        mdb = new MDBController(mainActivity, this);
+        //movieAPI = new MDB_API(mainActivity, this);
         initializeDataFragment();
         initializeFragments();
 
@@ -49,17 +48,7 @@ public class Controller {
 
     private void initializeFragments() {
         initializeStartFragment();
-        initializeMoviesFragment();
         initializeDetailsFragment();
-    }
-
-    private void initializeMoviesFragment() {
-        moviesFragment = (MoviesFragment) mainActivity.getFragment("MoviesFragment");
-        if (moviesFragment == null) {
-            moviesFragment = new MoviesFragment();
-        }
-        moviesFragment.setController(this);
-
     }
 
     private void initializeDetailsFragment() {
@@ -84,9 +73,6 @@ public class Controller {
             case "StartFragment":
                 setFragment(startFragment, "StartFragment");
                 break;
-            case "MoviesFragment":
-                setFragment(moviesFragment, "MoviesFragment");
-                break;
             case "DetailsFragment":
                 setFragment(detailsFragment, "DetailsFragment");
                 break;
@@ -102,11 +88,6 @@ public class Controller {
         setFragment("StartFragment");
     }
 
-
-    public void setContent(ArrayList<String> result) {
-        moviesFragment.setContent(result);
-    }
-
     public void startImageLoadTask() {
         movieAPI.startImageLoadTask();
     }
@@ -117,21 +98,14 @@ public class Controller {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public void showMovieDetails(int position) {
-        movie = movieAPI.getMovie(position);
-        System.out.println("Test");
-        System.out.println(movie.getPoster());
-        System.out.println(movie.getTitle());
+    public void onClick(Bundle bundle) {
+        mdb.requestRandomMovie(bundle);
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
         setFragment("DetailsFragment");
         detailsFragment.setMovie(movie);
-    }
-
-    public void setFilterBundle(Bundle filterBundle){
-        this.filterBundle = filterBundle;
-    }
-
-    public Bundle getFilterBundle(){
-        return filterBundle;
     }
 
     public boolean backPressed() {
@@ -148,4 +122,5 @@ public class Controller {
         }
         return false;
     }
+
 }

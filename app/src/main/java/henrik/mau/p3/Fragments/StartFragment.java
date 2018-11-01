@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import henrik.mau.p3.Controller.Controller;
-import henrik.mau.p3.Genres;
+import henrik.mau.p3.Entity.Genres;
 import henrik.mau.p3.R;
 
 /**
@@ -135,13 +135,19 @@ public class StartFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("genre", getGenreId());
+            bundle.putString("rating", getRating());
+            bundle.putBoolean("adult", getAdultMovies());
+
             int genreId = getGenreId();
             String rating = getRating();
             boolean adultMovies = getAdultMovies();
             String length = getLength();
             Log.d("CHECKVALUES", "GENREID: "+ genreId + " , RATING: "
                     + rating + " , ADULTMOVIES: " + adultMovies + ", LENGTH: " + length);
-           // controller.setFilterSettings();
+
+            controller.onClick(bundle);
         }
     }
 

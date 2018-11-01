@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.Entity;
 
 public class Genres {
     public static final int action = 28;
