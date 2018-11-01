@@ -2,7 +2,7 @@ package henrik.mau.p3;
 
 import android.util.Log;
 
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Random;
@@ -18,7 +18,8 @@ public class MDBController {
     private boolean rolled = false;
 
     private String baseUrl = "http://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY +
-            "&vote_average.gte=0";
+            "&vote_average.gte=0" +
+            "&sort_by=vote_count.desc";
 
     public MDBController(MainActivity activity, Controller controller) {
         this.activity = activity;
@@ -46,7 +47,10 @@ public class MDBController {
                 rolled = true;
 
             } else if (rolled){
-                
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+                JSONObject movie = jsonArray.getJSONObject(rand.nextInt(jsonArray.length()));
+                Log.d("mdb", movie.toString());
+
             }
         } catch (Exception e) {
             e.printStackTrace();
