@@ -65,33 +65,6 @@
                 android:paddingBottom="5dp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/favorite"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/rating"
-                android:layout_toRightOf="@+id/poster"
-                android:gravity="center"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="FAVORITE" />
-
-            <ImageView
-                android:id="@+id/ivSpeech"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_below="@+id/favorite"
-                android:layout_toRightOf="@+id/poster"
-                android:gravity="center"
-                android:layout_marginTop="80dp"
-                android:layout_marginLeft="200dp"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp" />
-
             <TextView
                 android:id="@+id/overview"
                 android:layout_width="wrap_content"

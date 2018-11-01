@@ -57,8 +57,6 @@ public class DetailsFragment extends Fragment {
         tvRating = view.findViewById(R.id.rating);
         tvOverview = view.findViewById(R.id.overview);
         ivPoster = view.findViewById(R.id.poster);
-        ivSpeech = view.findViewById(R.id.ivSpeech);
-        ivSpeech.setImageResource(R.drawable.speakericon);
         btnYoutube = view.findViewById(R.id.trailer);
 
         btnYoutube.setOnClickListener((View v) ->{

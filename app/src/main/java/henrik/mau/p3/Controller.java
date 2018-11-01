@@ -23,8 +23,8 @@ public class Controller {
 
     public Controller(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
-        MDBController mdb = new MDBController(mainActivity, this);
-        //movieAPI = new MDB_API(mainActivity, this);
+        //MDBController mdb = new MDBController(mainActivity, this);
+        movieAPI = new MDB_API(mainActivity, this);
         initializeDataFragment();
         initializeFragments();
     }
