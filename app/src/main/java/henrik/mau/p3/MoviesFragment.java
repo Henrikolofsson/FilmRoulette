@@ -71,7 +71,7 @@ public class MoviesFragment extends Fragment {
         getActivity().setTitle("Most Popular Movies");
 
         if (controller.isNetworkAvailable()) {
-            controller.startImageLoadTask();
+            //controller.startImageLoadTask();
             gridview.setVisibility(GridView.VISIBLE);
 
         } else {
