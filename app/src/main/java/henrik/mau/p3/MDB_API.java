@@ -61,7 +61,10 @@ public class MDB_API {
 
         @Override
         protected void onPostExecute(ArrayList<String> result) {
+            System.out.println("HEJ2");
             if (result != null && activity != null) {
+                System.out.println("HEJ");
+                System.out.println(result.get(0));
                 controller.setContent(result);
 
 
@@ -79,7 +82,8 @@ public class MDB_API {
                     if (sortbypop) {
                         urlString = "http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=" + API_KEY;
                     } else {
-                        urlString = "http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&vote_count.gte=500&api_key=" + API_KEY;
+                      //  urlString = "https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=1382cca4854a01eee1ddc83dc5102dbf";
+                     urlString = "http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&vote_count.gte=500&api_key=" + API_KEY+"&language=en-US&page=2";
                     }
                     URL url = new URL(urlString);
                     urlConnection = (HttpURLConnection) url.openConnection();
@@ -108,6 +112,31 @@ public class MDB_API {
                     ratings = new ArrayList<String>(Arrays.asList(getStringsFromJSON(JSONResult, "vote_average")));
                     dates = new ArrayList<String>(Arrays.asList(getStringsFromJSON(JSONResult, "release_date")));
                     ids = new ArrayList<String>(Arrays.asList(getStringsFromJSON(JSONResult, "id")));
+
+
+                    while(true)
+                    {
+                        youtubes = new ArrayList<String>(Arrays.asList(getYoutubesFromIds(ids,0)));
+                        youtubes2 = new ArrayList<String>(Arrays.asList(getYoutubesFromIds(ids,1)));
+                        int nullCount = 0;
+                        for(int i = 0; i<youtubes.size();i++)
+                        {
+                            if(youtubes.get(i)==null)
+                            {
+                                nullCount++;
+                                youtubes.set(i,"no video found");
+                            }
+                        }
+
+                        if(nullCount>1)continue;
+                        break;
+                    }
+
+
+
+
+
+
 
                     try {
                         return getPathsFromJSON(JSONResult);
@@ -167,6 +196,84 @@ public class MDB_API {
         }
         return result;
     }
+    public String[] getYoutubesFromIds(ArrayList<String> ids, int position) {
+        String[] results = new String[ids.size()];
+        for (int i = 0; i < ids.size(); i++) {
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            String JSONResult;
+
+            try {
+                String urlString = null;
+                urlString = "http://api.themoviedb.org/3/movie/" + ids.get(i) + "/videos?api_key=" + API_KEY;
+
+
+                URL url = new URL(urlString);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
+
+                //Read the input stream into a String
+                InputStream inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) {
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line + "\n");
+                }
+                if (buffer.length() == 0) {
+                    return null;
+                }
+                JSONResult = buffer.toString();
+                try {
+                    results[i] = getYoutubeFromJSON(JSONResult, position);
+                } catch (JSONException E) {
+                    results[i] = "no video found";
+                }
+            } catch (Exception e) {
+
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (final IOException e) {
+                    }
+                }
+            }
+        }
+        return results;
+    }
+
+    public String getYoutubeFromJSON(String JSONStringParam, int position) throws JSONException
+    {
+        JSONObject JSONString = new JSONObject(JSONStringParam);
+        JSONArray youtubesArray = JSONString.getJSONArray("results");
+        JSONObject youtube;
+        String result = "no videos found";
+        if(position ==0)
+        {
+            youtube = youtubesArray.getJSONObject(0);
+            result = youtube.getString("key");
+        }
+        else if(position==1)
+        {
+            if(youtubesArray.length()>1)
+            {
+                youtube = youtubesArray.getJSONObject(1);
+            }
+            else{
+                youtube = youtubesArray.getJSONObject(0);
+            }
+            result = youtube.getString("key");
+        }
+        return result;
+    }
 
     public Movie getMovie(int position) {
         Movie movie = new Movie();
@@ -175,6 +282,8 @@ public class MDB_API {
         movie.setDate(dates.get(position));
         movie.setOverview(overviews.get(position));
         movie.setRating(ratings.get(position));
+        movie.setYoutube(youtubes.get(position));
+        System.out.print(movie.getYoutube());
         return movie;
     }
 
