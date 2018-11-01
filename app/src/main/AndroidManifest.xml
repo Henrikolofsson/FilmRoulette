@@ -22,11 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.StandalonePlayerDemoActivity"
+        <activity android:name=".Activity.YoutubeActivity"
             android:parentActivityName=".Activity.MainActivity"
             ></activity>
-        <activity android:name=".Activity.YoutubeActivity"
-            ></activity>
+
 
     </application>
 
