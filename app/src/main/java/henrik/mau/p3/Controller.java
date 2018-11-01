@@ -41,7 +41,6 @@ public class Controller {
         initializeStartFragment();
         initializeMoviesFragment();
         initializeDetailsFragment();
-        setFragment("MoviesFragment");
     }
 
     private void initializeMoviesFragment() {

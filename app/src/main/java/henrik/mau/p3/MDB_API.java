@@ -1,6 +1,7 @@
 package henrik.mau.p3;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +29,7 @@ public class MDB_API {
     private static ArrayList<ArrayList<String>> comments;
 
     private static boolean sortByPop;
+    private String URL;
 
     private static String API_KEY = "1382cca4854a01eee1ddc83dc5102dbf";
     private MainActivity activity;
@@ -145,6 +147,12 @@ public class MDB_API {
             }
             return result;
         }
+    }
+
+
+    //Make the method more complex when working with inputs from spinners
+    public void setURLString(String URL){
+        this.URL = URL;
     }
 
 
