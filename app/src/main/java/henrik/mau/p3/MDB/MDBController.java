@@ -1,5 +1,7 @@
 package henrik.mau.p3.MDB;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -31,6 +33,14 @@ public class MDBController {
         request.requestStringFromURL(baseUrl);
     }
 
+    public void requestRandomMovie(@Nullable Bundle filterBundle){
+        String urlString = baseUrl;
+        int genre;
+        String rating;
+        boolean adult;
+        String length;
+    }
+
     public void onStringReturn(String string) {
         Log.d("mdb", string);
         try {
@@ -59,4 +69,5 @@ public class MDBController {
             e.printStackTrace();
         }
     }
+
 }
