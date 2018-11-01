@@ -1,11 +1,16 @@
 package henrik.mau.p3.Fragments;
 
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -19,6 +24,7 @@ import android.widget.Button;
 
 import com.squareup.picasso.Picasso;
 
+import henrik.mau.p3.Activity.StandalonePlayerDemoActivity;
 import henrik.mau.p3.Controller.Controller;
 import henrik.mau.p3.Entity.Movie;
 import henrik.mau.p3.Activity.YoutubeActivity;
@@ -70,12 +76,12 @@ public class DetailsFragment extends Fragment {
         setWindow();
 
         btnYoutube.setOnClickListener((View v) -> {
-            Intent intent = new Intent(getActivity(), YoutubeActivity.class);
+           Intent intent = new Intent(getActivity(), StandalonePlayerDemoActivity.class);
             System.out.println(trailer);
             trailer = movie.getYoutube();
             if(trailer!=null) {
                 intent.putExtra("video_code", trailer);
-                startActivity(intent);
+               startActivity(intent);
             }
         });
 
