@@ -1,4 +1,4 @@
-package henrik.mau.p3;
+package henrik.mau.p3.Fragments;
 
 
 import android.content.Intent;
@@ -13,11 +13,10 @@ import android.widget.Button;
 
 
 import com.squareup.picasso.Picasso;
-
-import henrik.mau.p3.Activity.YoutubeActivity;
 import henrik.mau.p3.Controller.Controller;
 import henrik.mau.p3.Entity.Movie;
-import henrik.mau.p3.Fragments.MoviesFragment;
+import henrik.mau.p3.R;
+import henrik.mau.p3.Activity.YoutubeActivity;
 
 
 /**
@@ -62,6 +61,8 @@ public class DetailsFragment extends Fragment {
         tvRating = view.findViewById(R.id.rating);
         tvOverview = view.findViewById(R.id.overview);
         ivPoster = view.findViewById(R.id.poster);
+        ivSpeech = view.findViewById(R.id.ivSpeech);
+        ivSpeech.setImageResource(R.drawable.speakericon);
         btnYoutube = view.findViewById(R.id.trailer);
 
         btnYoutube.setOnClickListener((View v) ->{
