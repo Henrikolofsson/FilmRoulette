@@ -18,5 +18,5 @@ public class Genres {
     public static final int scienceFiction = 878;
     public static final int thriller = 53;
     public static final int war = 10752;
-    public static final int western = 10752;
+    public static final int western = 37;
 }

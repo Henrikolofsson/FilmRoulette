@@ -26,8 +26,8 @@ public class MDBController {
 
     private String baseUrl = "http://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY +
             "&vote_average.gte=0" +
-            "&sort_by=vote_count.desc" +
-            "&include_video=true";
+            "&vote_count.gte=1" +
+            "&sort_by=vote_count.desc";
     private String filterUrl;
 
     public MDBController(MainActivity activity, Controller controller) {
@@ -112,7 +112,7 @@ public class MDBController {
                 Movie movie = new Movie(jsonMovie.getString("original_title"),
                         jsonMovie.getString("release_date"),
                         jsonMovie.getString("overview"),
-                        jsonMovie.getDouble("vote_average") + "/10",
+                        jsonMovie.getDouble("vote_average") + "/10.0",
                         jsonMovie.getInt("id") + "",
                         jsonMovie.getString("poster_path"));
                         movie.setBackdrop(jsonMovie.getString("backdrop_path"));
