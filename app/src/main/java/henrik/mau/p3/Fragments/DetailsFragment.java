@@ -36,8 +36,7 @@ public class DetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private int width;
-
+    private int pWidth;
     private String poster;
     private Movie movie;
 
@@ -46,11 +45,11 @@ public class DetailsFragment extends Fragment {
     private TextView tvRating;
     private TextView tvDate;
     private ImageView ivPoster;
+    private ImageView ivBackdrop;
     private Controller controller;
     private View view;
     private String trailer;
     private Button btnYoutube;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,13 +65,17 @@ public class DetailsFragment extends Fragment {
     }
 
     private void initComponents(View view) {
+        setWindow();
         tvTitle = view.findViewById(R.id.title);
         tvDate = view.findViewById(R.id.date);
         tvRating = view.findViewById(R.id.rating);
         tvOverview = view.findViewById(R.id.overview);
         ivPoster = view.findViewById(R.id.poster);
+        ivBackdrop = view.findViewById(R.id.backdrop);
         btnYoutube = view.findViewById(R.id.trailer);
-        setWindow();
+        Picasso.with(getActivity()).load(R.drawable.black).resize(
+                pWidth, (int) (pWidth * 1.5)).into(ivPoster);
+
 
         btnYoutube.setOnClickListener((View v) -> {
             Intent intent = new Intent(getActivity(), YoutubeActivity.class);
@@ -98,13 +101,14 @@ public class DetailsFragment extends Fragment {
             poster = movie.getPoster();
             System.out.println(poster);
             Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/" + poster).resize(
-                    width, (int) (width * 1.5)).into(ivPoster);
+                    pWidth, (int) (pWidth * 1.5)).into(ivPoster);
 
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
             tvRating.setText(movie.getRating());
             tvDate.setText(movie.getDate());
 
+            Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/" + movie.getBackdrop()).into(ivBackdrop);
 
         }
     }
@@ -114,7 +118,7 @@ public class DetailsFragment extends Fragment {
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        width = size.x / 3;
+        pWidth = size.x / 3;
     }
 
     public void setMovie(Movie movie) {
@@ -129,6 +133,8 @@ public class DetailsFragment extends Fragment {
     public void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
         bundle.putSerializable("movie", movie);
+
     }
+
 
 }

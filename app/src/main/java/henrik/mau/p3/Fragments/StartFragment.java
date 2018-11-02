@@ -139,6 +139,7 @@ public class StartFragment extends Fragment {
                     + rating + " , ADULTMOVIES: " + adultMovies);
 
             controller.onClick(bundle);
+
         }
     }
 

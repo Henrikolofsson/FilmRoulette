@@ -10,8 +10,11 @@ public class Movie implements Serializable {
     private String id;
     private String youtube;
     private String poster;
+    private String backdrop;
 
-    public Movie(){}
+
+    public Movie() {
+    }
 
     public Movie(String title, String date, String overview, String rating, String id, String poster) {
         this.title = title;
@@ -78,4 +81,13 @@ public class Movie implements Serializable {
     public void setPoster(String poster) {
         this.poster = poster;
     }
+
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
+    }
+
 }

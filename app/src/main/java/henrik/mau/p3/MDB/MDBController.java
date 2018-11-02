@@ -81,9 +81,9 @@ public class MDBController {
                 int page;
 
                 if (totalPages >= 1000) {
-                    page = rand.nextInt(1000);
+                    page = rand.nextInt(999)+1;
                 } else {
-                    page = rand.nextInt(totalPages);
+                    page = rand.nextInt(totalPages-1)+1;
                 }
 
                 String url = baseUrl + "&page=" + page;
@@ -100,6 +100,7 @@ public class MDBController {
                     controller.setTrailer(result);
                 }
                 movieIsSet = false;
+                rolled = false;
 
             } else if (rolled && !movieIsSet) {
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
@@ -110,6 +111,7 @@ public class MDBController {
                         jsonMovie.getDouble("vote_average") + "/10",
                         jsonMovie.getInt("id") + "",
                         jsonMovie.getString("poster_path"));
+                        movie.setBackdrop(jsonMovie.getString("backdrop_path"));
                 Log.d("mdb", jsonMovie.toString());
                 controller.setMovie(movie);
                 movieIsSet = true;

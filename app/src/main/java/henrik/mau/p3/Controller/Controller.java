@@ -84,12 +84,6 @@ public class Controller {
         dataFragment.setActiveFragment(tag);
     }
 
-    public void addStartFragment() {
-        setFragment("StartFragment");
-    }
-
-
-
 
 
     public void onClick(Bundle bundle) {
@@ -98,9 +92,9 @@ public class Controller {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
-        setFragment("DetailsFragment");
         detailsFragment.setMovie(movie);
         mdb.requestYoutubeVideo(movie.getId());
+        setFragment("DetailsFragment");
     }
 
     public boolean backPressed() {

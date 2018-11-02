@@ -6,25 +6,48 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context=".Fragments.DetailsFragment">
+    tools:context=".Fragments.DetailsFragment"
+    android:background="@color/White"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="149dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="0dp"
+                android:adjustViewBounds="true"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+
+                android:paddingBottom="0dp"
+                android:scaleType="centerCrop" />
+
             <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="149dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:background="#000000"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:background="#56000000"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:textColor="#ffffffff"
@@ -34,7 +57,7 @@
                 android:id="@+id/poster"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
+                android:layout_below="@+id/backdrop"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
@@ -45,12 +68,13 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
+                android:layout_below="@+id/backdrop"
                 android:layout_toRightOf="@+id/poster"
                 android:paddingLeft="5dp"
                 android:paddingTop="15dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="0dp"
+                android:textColor="@color/Black"
                 android:textSize="25dp" />
 
             <TextView
@@ -59,10 +83,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/date"
                 android:layout_toRightOf="@+id/poster"
-                android:paddingLeft="5dp"
-                android:paddingTop="0dp"
+                android:paddingLeft="7dp"
+                android:paddingTop="2dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="5dp"
+                android:textColor="@color/Black"
                 android:textStyle="bold" />
 
             <TextView
@@ -75,7 +100,7 @@
                 android:paddingRight="15dp"
                 android:paddingBottom="15dp"
 
-                />
+                android:textColor="@color/Black" />
 
             <LinearLayout
                 android:id="@+id/linear"
@@ -89,27 +114,26 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/black" />
+                    android:background="@android:color/white" />
 
                 <Button
                     android:id="@+id/trailer"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:background="@color/Black"
+                    android:gravity="center_vertical|center_horizontal"
                     android:paddingLeft="15dp"
                     android:paddingTop="0dp"
                     android:paddingRight="0dp"
                     android:paddingBottom="0dp"
-                    android:text="Watch Trailer " />
-
+                    android:text="Watch Trailer "
+                    android:textColor="@color/White" />
 
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/black" />
-
-
+                    android:background="@android:color/white" />
 
 
             </LinearLayout>
