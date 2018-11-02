@@ -32,7 +32,6 @@ public class StartFragment extends Fragment {
                                                             "Romance", "ScienceFiction", "Thriller", "War", "Western"};
 
     private static String[] rating = new String[]{"High", "Medium", "Low", "Any Rating"};
-    private static String[] length = new String[]{"Long", "Medium", "Short"};
 
     public StartFragment() {
         // Required empty public constructor
@@ -49,8 +48,6 @@ public class StartFragment extends Fragment {
         spinnerGenre.setAdapter(spinnerGenreAdapter);
         ArrayAdapter<String> spinnerScoreAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, rating);
         spinnerRating.setAdapter(spinnerScoreAdapter);
-        ArrayAdapter<String> spinnerLengthAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, length);
-        spinnerLength.setAdapter(spinnerLengthAdapter);
         return view;
     }
 
@@ -65,7 +62,6 @@ public class StartFragment extends Fragment {
     private void initializeComponents(View view) {
         spinnerGenre = (Spinner) view.findViewById(R.id.spinnerGenre);
         spinnerRating = (Spinner) view.findViewById(R.id.spinnerScore);
-        spinnerLength = (Spinner) view.findViewById(R.id.spinnerLength);
         switch18 = (Switch) view.findViewById(R.id.switch18);
         btnRoulette = (Button) view.findViewById(R.id.btnRoulette);
     }
@@ -127,10 +123,6 @@ public class StartFragment extends Fragment {
         }
     }
 
-    private String getLength(){
-        return spinnerLength.getSelectedItem().toString();
-    }
-
     private class ButtonRouletteListener implements View.OnClickListener {
 
         @Override
@@ -143,9 +135,8 @@ public class StartFragment extends Fragment {
             int genreId = getGenreId();
             String rating = getRating();
             boolean adultMovies = getAdultMovies();
-            String length = getLength();
             Log.d("CHECKVALUES", "GENREID: "+ genreId + " , RATING: "
-                    + rating + " , ADULTMOVIES: " + adultMovies + ", LENGTH: " + length);
+                    + rating + " , ADULTMOVIES: " + adultMovies);
 
             controller.onClick(bundle);
         }
