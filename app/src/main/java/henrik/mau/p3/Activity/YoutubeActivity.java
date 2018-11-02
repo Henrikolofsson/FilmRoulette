@@ -24,14 +24,8 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import henrik.mau.p3.R;
@@ -52,7 +46,7 @@ public class YoutubeActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.standalone_player_demo);
+        setContentView(R.layout.activity_youtube);
         Intent intent = getIntent();
         VIDEO_CODE = intent.getStringExtra("video_code");
         if(!played){
