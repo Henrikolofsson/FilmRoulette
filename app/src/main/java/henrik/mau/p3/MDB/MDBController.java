@@ -28,6 +28,7 @@ public class MDBController {
             "&vote_average.gte=0" +
             "&sort_by=vote_count.desc" +
             "&include_video=true";
+    private String filterUrl;
 
     public MDBController(MainActivity activity, Controller controller) {
         this.activity = activity;
@@ -45,6 +46,7 @@ public class MDBController {
             genre = filterBundle.getInt("genre");
             rating = filterBundle.getString("rating");
             adult = filterBundle.getBoolean("adult");
+            Log.d("mdb", "genre: " + genre + " rating: " + rating + " adult: " + adult);
         }
 
         if (genre != 0) {
@@ -52,6 +54,7 @@ public class MDBController {
         }
 
         if (rating.equals("High")) {
+
             urlString += "&vote_average.gte=7.0";
         } else if (rating.equals("Low")) {
             urlString += "&vote_average.lte=4.0";
@@ -64,6 +67,7 @@ public class MDBController {
             urlString += "&include_adult=true";
         }
 
+        filterUrl = urlString;
         request.requestStringFromURL(urlString);
     }
 
@@ -86,7 +90,7 @@ public class MDBController {
                     page = rand.nextInt(totalPages-1)+1;
                 }
 
-                String url = baseUrl + "&page=" + page;
+                String url = filterUrl + "&page=" + page;
                 request.requestStringFromURL(url);
                 rolled = true;
 
@@ -116,7 +120,6 @@ public class MDBController {
                 controller.setMovie(movie);
                 movieIsSet = true;
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();

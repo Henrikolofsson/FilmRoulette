@@ -1,5 +1,7 @@
 package henrik.mau.p3.MDB;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -17,6 +19,7 @@ public class MDBRequest {
             @Override
             public void run() {
                 try {
+                    Log.d("mdb url : ", urlString);
                     URL url = new URL(urlString);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod("GET");

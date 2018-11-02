@@ -1,6 +1,5 @@
 package henrik.mau.p3.Fragments;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -15,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
-
 
 import com.squareup.picasso.Picasso;
 
@@ -86,7 +84,6 @@ public class DetailsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 
     public void onResume() {
@@ -99,16 +96,14 @@ public class DetailsFragment extends Fragment {
     public void setValues() {
         if (movie != null) {
             poster = movie.getPoster();
-            System.out.println(poster);
             Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/" + poster).resize(
                     pWidth, (int) (pWidth * 1.5)).into(ivPoster);
+            Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/" + movie.getBackdrop()).into(ivBackdrop);
 
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
             tvRating.setText(movie.getRating());
             tvDate.setText(movie.getDate());
-
-            Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/" + movie.getBackdrop()).into(ivBackdrop);
 
         }
     }
