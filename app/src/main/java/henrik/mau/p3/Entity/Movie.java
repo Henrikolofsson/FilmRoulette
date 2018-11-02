@@ -1,6 +1,8 @@
 package henrik.mau.p3.Entity;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     private String title;
     private String date;
     private String overview;

@@ -35,6 +35,7 @@ public class DetailsFragment extends Fragment {
         setHasOptionsMenu(true);
         // Required empty public constructor
     }
+
     private int width;
 
     private String poster;
@@ -55,8 +56,12 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_details, container, false);
-
         initComponents(view);
+        if (savedInstanceState != null) {
+            movie = (Movie) savedInstanceState.getSerializable("movie");
+            System.out.println(movie.getTitle());
+            setValues();
+        }
         return view;
     }
 
@@ -70,12 +75,12 @@ public class DetailsFragment extends Fragment {
         setWindow();
 
         btnYoutube.setOnClickListener((View v) -> {
-           Intent intent = new Intent(getActivity(), YoutubeActivity.class);
+            Intent intent = new Intent(getActivity(), YoutubeActivity.class);
             System.out.println(trailer);
             trailer = movie.getYoutube();
-            if(trailer!=null) {
+            if (trailer != null) {
                 intent.putExtra("video_code", trailer);
-               startActivity(intent);
+                startActivity(intent);
             }
         });
 
@@ -84,6 +89,11 @@ public class DetailsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d("movie", movie.toString());
+
+        setValues();
+    }
+
+    public void setValues() {
         if (movie != null) {
             poster = movie.getPoster();
             System.out.println(poster);
@@ -94,6 +104,7 @@ public class DetailsFragment extends Fragment {
             tvOverview.setText(movie.getOverview());
             tvRating.setText(movie.getRating());
             tvDate.setText(movie.getDate());
+
 
         }
     }
@@ -114,5 +125,10 @@ public class DetailsFragment extends Fragment {
         this.controller = controller;
     }
 
+
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putSerializable("movie", movie);
+    }
 
 }

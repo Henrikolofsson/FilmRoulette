@@ -35,6 +35,7 @@ public class Controller {
 
     private void initializeDataFragment() {
         dataFragment = (DataFragment) mainActivity.getFragment("DataFragment");
+
         if (dataFragment == null) {
             dataFragment = new DataFragment();
             mainActivity.addFragment(dataFragment, "DataFragment");
@@ -46,6 +47,8 @@ public class Controller {
     private void initializeFragments() {
         initializeStartFragment();
         initializeDetailsFragment();
+
+        setFragment(dataFragment.getActiveFragment());
     }
 
     private void initializeDetailsFragment() {
@@ -62,7 +65,7 @@ public class Controller {
             startFragment = new StartFragment();
         }
         startFragment.setController(this);
-        addStartFragment();
+
     }
 
     private void setFragment(String tag) {

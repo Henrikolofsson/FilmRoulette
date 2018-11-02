@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public Fragment getFragment(String tag){
+
         return fragmentManager.findFragmentByTag(tag);
     }
 
