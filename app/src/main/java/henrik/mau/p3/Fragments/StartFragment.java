@@ -26,12 +26,11 @@ public class StartFragment extends Fragment {
     private Spinner spinnerLength;
     private Switch switch18;
     private Button btnRoulette;
-    private static String[] genres = new String[]{"Action", "Adventure", "Animation", "Comedy", "Crime",
-                                                     "Documentary", "Drama", "Family", "Fantasy",
-                                                        "History", "Horror", "Music", "Mystery",
-                                                            "Romance", "ScienceFiction", "Thriller", "War", "Western"};
+    private static String[] genres = new String[]{"Any Genre", "Action", "Adventure", "Animation",
+            "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror",
+            "Music", "Mystery", "Romance", "ScienceFiction", "Thriller", "War", "Western"};
 
-    private static String[] rating = new String[]{"High", "Medium", "Low", "Any Rating"};
+    private static String[] rating = new String[]{"Any Rating", "High", "Medium", "Low"};
 
     public StartFragment() {
         // Required empty public constructor
@@ -44,9 +43,9 @@ public class StartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_start, container, false);
         initializeComponents(view);
         registerListeners();
-        ArrayAdapter<String> spinnerGenreAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, genres);
+        ArrayAdapter<String> spinnerGenreAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, genres);
         spinnerGenre.setAdapter(spinnerGenreAdapter);
-        ArrayAdapter<String> spinnerScoreAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, rating);
+        ArrayAdapter<String> spinnerScoreAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, rating);
         spinnerRating.setAdapter(spinnerScoreAdapter);
         return view;
     }
