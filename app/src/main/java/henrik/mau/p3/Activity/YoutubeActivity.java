@@ -36,7 +36,7 @@ public class YoutubeActivity extends Activity {
     private static final int REQ_START_STANDALONE_PLAYER = 1;
     private static final int REQ_RESOLVE_SERVICE_MISSING = 2;
     private String VIDEO_CODE = "";
-    private boolean played=false;
+    private boolean played = false;
 
 
     @Override
@@ -46,11 +46,11 @@ public class YoutubeActivity extends Activity {
         setContentView(R.layout.activity_youtube);
         Intent intent = getIntent();
         VIDEO_CODE = intent.getStringExtra("video_code");
-        if(!played){
-        startVideo();
-        played=true;
+        if (!played) {
+            startVideo();
+            played = true;
         }
-        if(played){
+        if (played) {
             onBackPressed();
         }
     }
@@ -92,19 +92,8 @@ public class YoutubeActivity extends Activity {
         return resolveInfo != null && !resolveInfo.isEmpty();
     }
 
-    private int parseInt(String text, int defaultValue) {
-        if (!TextUtils.isEmpty(text)) {
-            try {
-                return Integer.parseInt(text);
-            } catch (NumberFormatException e) {
-                // fall through
-            }
-        }
-        return defaultValue;
-    }
-
     @Override
     public void onBackPressed() {
-    super.onBackPressed();
+        super.onBackPressed();
     }
 }
