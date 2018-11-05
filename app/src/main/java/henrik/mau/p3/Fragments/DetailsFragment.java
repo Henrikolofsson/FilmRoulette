@@ -70,11 +70,6 @@ public class DetailsFragment extends Fragment {
         ivBackdrop = view.findViewById(R.id.backdrop);
         btnYoutube = view.findViewById(R.id.trailer);
         ivPoster.setImageResource(R.drawable.black);
-       // Picasso.with(getActivity()).load(R.drawable.black).resize(
-         //       pWidth, (int) (pWidth * 1.5)).into(ivPoster);
-
-
-
     }
 
     public void onResume() {
