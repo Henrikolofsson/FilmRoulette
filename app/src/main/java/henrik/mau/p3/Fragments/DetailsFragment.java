@@ -69,19 +69,12 @@ public class DetailsFragment extends Fragment {
         ivPoster = view.findViewById(R.id.poster);
         ivBackdrop = view.findViewById(R.id.backdrop);
         btnYoutube = view.findViewById(R.id.trailer);
-        Picasso.with(getActivity()).load(R.drawable.black).resize(
-                pWidth, (int) (pWidth * 1.5)).into(ivPoster);
+        ivPoster.setImageResource(R.drawable.black);
+       // Picasso.with(getActivity()).load(R.drawable.black).resize(
+         //       pWidth, (int) (pWidth * 1.5)).into(ivPoster);
 
 
-        btnYoutube.setOnClickListener((View v) -> {
-            Intent intent = new Intent(getActivity(), YoutubeActivity.class);
-            System.out.println(trailer);
-            trailer = movie.getYoutube();
-            if (trailer != null) {
-                intent.putExtra("video_code", trailer);
-                startActivity(intent);
-            }
-        });
+
     }
 
     public void onResume() {
@@ -91,18 +84,29 @@ public class DetailsFragment extends Fragment {
         setValues();
     }
 
-    public void setValues() {
+    public  void setValues() {
         if (movie != null) {
+
             poster = movie.getPoster();
-            Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/" + poster).resize(
+           Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/" + poster).resize(
                     pWidth, (int) (pWidth * 1.5)).into(ivPoster);
             Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/" + movie.getBackdrop()).into(ivBackdrop);
+
 
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
             tvRating.setText(movie.getRating());
             tvDate.setText(movie.getDate());
 
+            btnYoutube.setOnClickListener((View v) -> {
+                Intent intent = new Intent(getActivity(), YoutubeActivity.class);
+                System.out.println(trailer);
+                trailer = movie.getYoutube();
+                if (trailer != null) {
+                    intent.putExtra("video_code", trailer);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
@@ -112,6 +116,10 @@ public class DetailsFragment extends Fragment {
         Point size = new Point();
         display.getSize(size);
         pWidth = size.x / 3;
+        float density = getActivity().getResources().getDisplayMetrics().density;
+        float dp = pWidth / density;
+        float dp2 = (float)(pWidth*1.5)/density;
+        Log.d("METRICS", "setWindow: "+dp+", "+dp2);
     }
 
     public void setMovie(Movie movie) {

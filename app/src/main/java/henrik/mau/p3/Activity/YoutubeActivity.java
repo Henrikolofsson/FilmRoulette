@@ -30,10 +30,7 @@ import java.util.List;
 
 import henrik.mau.p3.R;
 
-/**
- * A simple YouTube Android API demo application which shows how to use a
- * {@link YouTubeStandalonePlayer} intent to start a YouTube video playback.
- */
+
 public class YoutubeActivity extends Activity {
     private final String API_KEY = "AIzaSyCgVDJtBN1GfOYbARBO00pRXQ2ZepnqBCU";
     private static final int REQ_START_STANDALONE_PLAYER = 1;
