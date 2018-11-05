@@ -28,7 +28,6 @@ import henrik.mau.p3.R;
  */
 public class DetailsFragment extends Fragment {
 
-
     public DetailsFragment() {
         setHasOptionsMenu(true);
         // Required empty public constructor
@@ -44,7 +43,6 @@ public class DetailsFragment extends Fragment {
     private TextView tvDate;
     private ImageView ivPoster;
     private ImageView ivBackdrop;
-    private Controller controller;
     private View view;
     private String trailer;
     private Button btnYoutube;
@@ -119,11 +117,6 @@ public class DetailsFragment extends Fragment {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
-
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
-
 
     public void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);

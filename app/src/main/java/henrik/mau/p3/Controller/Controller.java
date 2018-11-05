@@ -27,7 +27,7 @@ public class Controller {
 
     public Controller(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
-        mdb = new MDBController(mainActivity, this);
+        mdb = new MDBController(this);
         initializeDataFragment();
         initializeFragments();
 
@@ -41,7 +41,6 @@ public class Controller {
             mainActivity.addFragment(dataFragment, "DataFragment");
             dataFragment.setActiveFragment("StartFragment");
         }
-        dataFragment.setController(this);
     }
 
     private void initializeFragments() {
@@ -56,7 +55,6 @@ public class Controller {
         if (detailsFragment == null) {
             detailsFragment = new DetailsFragment();
         }
-        detailsFragment.setController(this);
     }
 
     private void initializeStartFragment() {

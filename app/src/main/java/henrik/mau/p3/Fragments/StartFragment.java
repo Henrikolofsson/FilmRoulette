@@ -23,7 +23,6 @@ public class StartFragment extends Fragment {
     private Controller controller;
     private Spinner spinnerGenre;
     private Spinner spinnerRating;
-    private Spinner spinnerLength;
     private Switch switch18;
     private Button btnRoulette;
     private static String[] genres = new String[]{"Any Genre", "Action", "Adventure", "Animation",

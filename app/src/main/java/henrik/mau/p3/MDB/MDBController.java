@@ -17,7 +17,6 @@ public class MDBController {
     private static String API_KEY = "1382cca4854a01eee1ddc83dc5102dbf";
 
     private Controller controller;
-    private MainActivity activity;
     private MDBRequest request;
 
     private Random rand = new Random();
@@ -30,8 +29,7 @@ public class MDBController {
             "&sort_by=vote_count.desc";
     private String filterUrl;
 
-    public MDBController(MainActivity activity, Controller controller) {
-        this.activity = activity;
+    public MDBController(Controller controller) {
         this.controller = controller;
         request = new MDBRequest(this);
     }

@@ -15,9 +15,7 @@ import henrik.mau.p3.R;
  * A simple {@link Fragment} subclass.
  */
 public class DataFragment extends Fragment {
-    private Controller controller;
     private String activeFragment;
-
 
     public DataFragment() {
         // Required empty public constructor
@@ -29,13 +27,6 @@ public class DataFragment extends Fragment {
         setRetainInstance(true);
     }
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_data, container, false);
-//        return view;
-//    }
-
     public void setActiveFragment(String tag){
         activeFragment = tag;
     }
@@ -43,11 +34,4 @@ public class DataFragment extends Fragment {
     public String getActiveFragment(){
         return  activeFragment;
     }
-
-    public void setController(Controller controller){
-        this.controller = controller;
-    }
-
-
-
 }
