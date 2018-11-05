@@ -2,8 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="150dp"
     android:orientation="vertical"
-    tools:context=".Fragments.StartFragment">
+    tools:context=".Fragments.StartFragment"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -18,8 +20,8 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:textColor="@color/netflixRed"
-            android:text="@string/Genres" />
+            android:text="@string/Genres"
+            android:textColor="@color/netflixRed" />
 
         <Spinner
             android:id="@+id/spinnerGenre"
@@ -49,8 +51,8 @@
             android:id="@+id/spinnerScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -80,10 +82,10 @@
             android:id="@+id/btnRoulette"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:layout_weight="1"
             android:background="@color/btnGray"
             android:text="@string/RouletteBtn"
-            android:layout_marginTop="50dp"
             android:textColor="@color/netflixRed" />
     </LinearLayout>
 

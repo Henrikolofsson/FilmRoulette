@@ -11,7 +11,7 @@ import henrik.mau.p3.R;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Controller controller;
+        private Controller controller;
     private FragmentManager fragmentManager;
 
     @Override
